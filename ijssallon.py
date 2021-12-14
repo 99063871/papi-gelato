@@ -1,8 +1,17 @@
 print("Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.")
 
+def welkeSmaakFunc():
+    a=1
+    for a in range(int(amount)):
+        smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?").lower()
+        if smaak != 'a' and smaak != 'c' and smaak != 'm' and smaak != 'v':
+            print("Sorry dat snap ik niet...")
+            welkeSmaakFunc()
+
 def papiGelatoFunc():
     global amount
     amount = input("Hoeveel bolletjes wilt u?")
+    welkeSmaakFunc()
     if amount <= "3":
         inWhat()
     elif amount >= "4" and amount <= "8":
