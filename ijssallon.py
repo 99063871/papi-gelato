@@ -6,11 +6,15 @@ bolletjesPrijs = 1.10
 horrentjePrijs = 1.25
 bakjePrijs = 0.75
 
+toppingTotal = 0
+toppingTotalPrice = 0
+slagroomprice = 0.50
+sprinkelsprice = 0.30
+
 print("Welkom bij Papi Gelato.")
 
 def welkeSmaakFunc():
-    a=1
-    for a in range(int(amount)):
+    for a in range(1, int(amount) + 1):
         smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?").lower()
         if smaak != 'a' and smaak != 'c' and smaak != 'm' and smaak != 'v':
             print("Sorry dat snap ik niet...")
@@ -28,6 +32,7 @@ def papiGelatoFunc():
     elif amount >= "4" and amount <= "8":
         bakOfhoorn = 'bakje'
         bakje +=1
+        toppingFunc()
         orderMoreFunc()
     elif amount > "8" and amount == int:
         print("Sorry, zulke grote bakken hebben we niet")
@@ -59,11 +64,33 @@ def inWhat():
         if bakOfhoorn == "a":
             bakOfhoorn = "hoorntje"
             horrentje += 1
+            toppingFunc()
         elif bakOfhoorn == "b":
             bakOfhoorn = 'bakje'
             bakje += 1
+            toppingFunc()
         orderMoreFunc()
         
+def toppingFunc():
+    global toppingTotal
+    global toppingTotalPrice
+    topping = input("Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?").lower()
+    if topping != "a":
+        if topping == "b":
+            toppingTotalPrice += slagroomprice
+            toppingTotal +=1
+        elif topping == "c":
+            toppingTotalPrice += sprinkelsprice * bolletjes
+            toppingTotal +=1
+        elif topping == "d":
+            toppingTotal +=1
+            if bakOfhoorn == "hoorntje":
+                toppingTotalPrice += 0.60
+            elif bakOfhoorn == "bakje":
+                toppingTotalPrice += 0.90
+        else:
+            print("Sorry dat snap ik niet...")
+            toppingFunc()
 
 def bonnetje():
     if bolletjes != 0:
@@ -74,9 +101,13 @@ def bonnetje():
         print('---------["Papi Gelato"]---------\n')
         print('Bolletjes     ',bolletjes, ' x €1.10   =€',bolletjesTotal)
         if horrentje != 0:
-            print('horrentje     ',horrentje, ' x €1.25   =€',horrentjeTotal)
+            print('Horrentje     ',horrentje, ' x €1.25   =€',horrentjeTotal)
         elif bakje != 0:
-            print('bakje         ',bakje, ' x €1.10   =€',bakjeTotal)
+            print('Bakje         ',bakje, ' x €1.10   =€',bakjeTotal)
+        if toppingTotal != 0:
+            print('Topping        1  x €', toppingTotalPrice,   '  =€',toppingTotalPrice)
+            
         print('                           -------- +')
         print('Totaal                      =€',total)
+
 papiGelatoFunc()
