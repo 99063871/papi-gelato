@@ -9,7 +9,7 @@ def zakelijk():
 def welkeSmaakFunc():
     for a in range(1, int(liter) + 1):
         smaak = input("Welke smaak wilt u voor liter nummer "+ str(a) +"? A) Aardbei, C) Chocolade of V) Vanille?").lower()
-        if smaak != 'a' and smaak != 'c' and smaak != 'm' and smaak != 'v':
+        if smaak != 'a' and smaak != 'c' and smaak != 'v':
             print(errorMessages)
             welkeSmaakFunc()
 

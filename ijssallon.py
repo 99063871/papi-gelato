@@ -23,8 +23,8 @@ def whoFunc():
 
         def welkeSmaakFunc():
             for a in range(1, int(amount) + 1):
-                smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?").lower()
-                if smaak != 'a' and smaak != 'c' and smaak != 'm' and smaak != 'v':
+                smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade of V) Vanille?").lower()
+                if smaak != 'a' and smaak != 'c' and smaak != 'v':
                     print(errorMessages)
                     welkeSmaakFunc()
 
