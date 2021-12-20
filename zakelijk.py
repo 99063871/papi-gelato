@@ -15,9 +15,9 @@ def welkeSmaakFunc():
 
 def bonnetje():
     price = int(liter)*9.80
-    btw = price/109*6
+    btw = price/109*9
     print('---------["Papi Gelato"]---------\n')
     print('Liter     ',liter, ' x €9.80   =€',round(price, 2))
     print('                           -------- +')
     print('Totaal                  = €',round(price ,2))
-    print('BTW (6%)                = €',round(btw, 2))
+    print('BTW (9%)                = €',round(btw, 2))
