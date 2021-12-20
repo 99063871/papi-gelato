@@ -3,8 +3,9 @@ import zakelijk
 bolletjes = 0
 horrentje = 0
 bakje = 0
+bakOfhoorn = ""
 
-bolletjesPrijs = 1.10
+bolletjesPrijs = 0.95
 horrentjePrijs = 1.25
 bakjePrijs = 0.75
 
@@ -21,7 +22,6 @@ def whoFunc():
     if who == "1":
 
         def welkeSmaakFunc():
-            
             for a in range(1, int(amount) + 1):
                 smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?").lower()
                 if smaak != 'a' and smaak != 'c' and smaak != 'm' and smaak != 'v':
@@ -32,7 +32,6 @@ def whoFunc():
             global amount
             global bolletjes
             global bakje
-            global bakOfhoorn
             amount = input("Hoeveel bolletjes wilt u?")
             bolletjes += int(amount)
             welkeSmaakFunc()
@@ -106,13 +105,13 @@ def whoFunc():
                 bolletjesTotal = bolletjes*bolletjesPrijs
                 horrentjeTotal = horrentje*horrentjePrijs
                 bakjeTotal = bakje*bakjePrijs
-                total = bolletjesTotal + horrentje + bakjeTotal
+                total = bolletjesTotal + horrentjeTotal + bakjeTotal + toppingTotalPrice
                 print('---------["Papi Gelato"]---------\n')
-                print('Bolletjes     ',bolletjes, ' x €1.10   =€',round(bolletjesTotal, 2))
+                print('Bolletjes     ',bolletjes, ' x €',str(bolletjesPrijs) + '=€',round(bolletjesTotal, 2))
                 if horrentje != 0:
-                    print('Horrentje     ',horrentje, ' x €1.25   =€',round(horrentjeTotal, 2))
+                    print('Horrentje     ',horrentje, ' x €',str(horrentjePrijs) + '=€',round(horrentjeTotal, 2))
                 elif bakje != 0:
-                    print('Bakje         ',bakje, ' x €1.10   =€',round(bakjeTotal, 2))
+                    print('Bakje         ',bakje, ' x €',str(bakjePrijs) + '=€',round(bakjeTotal, 2))
                 if toppingTotal != 0:
                     print('Topping        1  x €', toppingTotalPrice,   '  =€',round(toppingTotalPrice, 2))
                     
