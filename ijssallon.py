@@ -3,7 +3,6 @@ import yaml
 
 with open('settings.yml', 'r') as file:
     settings = yaml.safe_load(file)
-    print(settings)
 
 errorMessages = "Sorry dat is geen optie die we aanbieden..."
 
@@ -13,9 +12,11 @@ def whoFunc():
     if who == "1":
 
         def welkeSmaakFunc():
-            for a in range(1, int(amount) + 1):
+            for a in range(1, int(amount)+1):
                 smaak = input("Welke smaak wilt u voor bolletje nummer "+ str(a) +"? A) Aardbei, C) Chocolade of V) Vanille?").lower()
                 if smaak != 'a' and smaak != 'c' and smaak != 'v':
+                    a=0
+                    smaak=0
                     print(errorMessages)
                     welkeSmaakFunc()
 
@@ -23,7 +24,8 @@ def whoFunc():
             global amount, bakOfhoorn
             amount = input("Hoeveel bolletjes wilt u?")
             settings["bolletjesAmount"] += int(amount)
-            welkeSmaakFunc()
+            if amount < "9":
+                welkeSmaakFunc()
             if amount <= "3":
                 inWhat()
             elif amount >= "4" and amount <= "8":
@@ -70,17 +72,22 @@ def whoFunc():
             topping = input("Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?").lower()
             if topping != "a":
                 if topping == "b":
-                    settings["toppingTotalPrice"] += settings["slagroom"]
+                    settings["toppingTotalPrice"] += settings["toppings"]["slagroom"]
                     settings["toppingTotal"] +=1
                 elif topping == "c":
                     settings["toppingTotalPrice"] += settings["toppings"]["sprinkles"] * settings["bolletjesAmount"]
                     settings["toppingTotal"] +=1
                 elif topping == "d":
-                    settings["toppingTotal"] +=1
+                    if bakOfhoorn == "bakje":
+                        settings["toppingTotalPrice"] += settings["toppings"]["caramel"]["bakje"] * settings["bolletjesAmount"]
+                        settings["toppingTotal"] +=1
+                    else:
+                        settings["toppingTotalPrice"] += settings["toppings"]["caramel"]["hoorentje"] * settings["bolletjesAmount"]
+                        settings["toppingTotal"] +=1
                     if bakOfhoorn == "hoorntje":
-                        settings["toppingTotalPrice"] += settings["hoorentje"]
+                        settings["toppingTotalPrice"] += settings["hoorentjes"]
                     elif bakOfhoorn == "bakje":
-                        settings["toppingTotalPrice"] += settings["bakje"]
+                        settings["toppingTotalPrice"] += settings["bakjes"]
                 else:
                     print(errorMessages)
                     toppingFunc()
@@ -98,7 +105,7 @@ def whoFunc():
                 elif settings["bakjesAmount"] != 0:
                     print('Bakje         ',settings["bakjesAmount"], ' x €',str(settings["bakjes"]) + '=€',round(bakjeTotal, 2))
                 if settings["toppingTotal"] != 0:
-                    print('Topping        1  x €', settings["toppingTotalPrice"],   '  =€',round(settings["toppingTotalPrice"], 2))
+                    print('Topping        1  x €', round(settings["toppingTotalPrice"]),   '  =€',round(settings["toppingTotalPrice"], 2))
                     
                 print('                           -------- +')
                 print('Totaal                      =€',round(total, 2))
